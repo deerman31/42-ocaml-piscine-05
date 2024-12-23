@@ -1,19 +1,10 @@
-module IntSet = Set.Make(struct
-  type t = int
-  let compare = Int.compare
-end)
+let cat2 lst1 lst2 =
+  let rec aux acc lst =
+    match lst with [] -> acc | first :: rest -> aux (first :: acc) rest
+  in
+  aux lst2 (List.rev lst1)
+  (* aux (aux [] (List.rev lst2)) (List.rev lst1) *)
 
 let () =
-  let set = IntSet.empty in
-
-  (* 要素を追加 *)
-  let set = IntSet.add 1 set in
-  let set = IntSet.add 2 set in
-  let set = IntSet.add 3 set in
-  
-  (* 要素の確認 *)
-  Printf.printf "Contains 2? %b\n" (IntSet.mem 2 set);
-  
-  (* 全要素を表示 *)
-  IntSet.iter (Printf.printf "%d ") set;
-  print_newline ()
+  let lst = cat2 [ 0; 1; 2; 3; 4; 5 ] [ 6; 7; 8; 9 ] in
+  List.iter (fun x -> print_endline (string_of_int x)) lst
